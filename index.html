@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,13 +100,13 @@
     </audio>
 
     <div class="card">
-        <div class="days-tag">Together for 2407 Days ❤️</div>
+        <div class="days-tag">Together for 2407 Days...Forever ❤️</div>
         
         <div id="asking-phase">
             <div class="pic-container">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZneXF6bmZ6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v0hS6iPzG7o8e7bV6k/giphy.gif" alt="Waiting...">
+                <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZneXF6bmZ6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v0hS6iPzG7o8e7bV6k/giphy.gif" alt="Cute Bears">
             </div>
-            <h1>Will you be my Valentine, Nikki? 🌹</h1>
+            <h1>Will you be my Valentine, baby? 🌹</h1>
             <p>Sirf tumhara, Baby. ❤️</p>
             <div class="btn-group">
                 <button id="yesBtn">Yes! 💖</button>
@@ -117,8 +118,8 @@
             <div class="pic-container">
                 <img src="1000410336.jpg" alt="Nikki and Akash" onerror="this.src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmZ6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/9fuvO2fUuN84G2pGzW/giphy.gif'">
             </div>
-            <h1>I Love You, Nikki Baby! ❤️✨</h1>
-            <p id="status">Only Love You, Baby ❤️</p>
+            <h1>I Love You, Baby! ❤️✨</h1>
+            <p id="status">Love You, Baby ❤️</p>
             <div style="font-size: 40px;">🌹👩‍❤️‍👨🌹</div>
         </div>
     </div>
@@ -131,10 +132,16 @@
         const music = document.getElementById('music');
 
         const msgs = [
-            "No", "Ek baar aur soch lo na 💗", "Itna bhi mushkil nahi hai YES bolna 🥹",
-            "Dil se poocho, jawab YES hi aayega 💕", "Main yahin wait kar raha hoon ⏳",
-            "Ye NO thoda fake lag raha hai 👀", "Last chance… pakka wala 😭",
-            "Ab NO bolna allowed nahi hai 🚫", "Dil ka decision lo, ego ka nahi 💓", "YES likha hai kismat me ✨"
+            "No",
+            "Ek baar aur soch lo na 💗",
+            "Itna bhi mushkil nahi hai YES bolna 🥹",
+            "Dil se poocho, jawab YES hi aayega 💕",
+            "Main yahin wait kar raha hoon ⏳",
+            "Ye NO thoda fake lag raha hai 👀",
+            "Last chance… pakka wala 😭",
+            "Ab NO bolna allowed nahi hai 🚫",
+            "Dil ka decision lo, ego ka nahi 💓",
+            "YES likha hai kismat me ✨"
         ];
         let i = 0;
 
@@ -150,25 +157,19 @@
             askingPhase.style.display = "none";
             finalCelebration.style.display = "block";
             music.play();
-            // Start Falling Petals
             setInterval(createPetal, 150);
         };
 
         function createPetal() {
             const petal = document.createElement('div');
             petal.classList.add('petal');
-            
-            // Random sizes and positions
             const size = Math.random() * 15 + 10 + 'px';
             petal.style.width = size;
             petal.style.height = size;
             petal.style.left = Math.random() * 100 + 'vw';
             petal.style.animationDuration = Math.random() * 3 + 2 + 's';
-            
-            // Random petal colors (shades of red/pink)
             const colors = ['#ff4d6d', '#ff758f', '#c9184a', '#ffb3c1'];
             petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            
             document.body.appendChild(petal);
             setTimeout(() => petal.remove(), 5000);
         }

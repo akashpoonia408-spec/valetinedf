@@ -1,128 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <style>
+        /* CSS Styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fff0f3;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
 
-<style>
-body {
-    margin: 0;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ff1b6b, #ff758c);
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    text-align: center;
-}
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
 
-.container {
-    width: 100%;
-    padding: 20px;
-    z-index: 5;
-}
+        #gif-container {
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
-h2 {
-    font-size: 28px;
-    margin-bottom: 30px;
-}
+        img {
+            max-width: 250px;
+            border-radius: 15px;
+        }
 
-button {
-    font-size: 22px;
-    padding: 14px 32px;
-    margin: 15px;
-    border: none;
-    border-radius: 30px;
-}
+        h1 {
+            color: #ff4d6d;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
 
-#yesBtn {
-    background: #fff;
-    color: #ff1b6b;
-    font-weight: bold;
-}
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
 
-#noBtn {
-    background: red;
-    color: #fff;
-    position: absolute;
-    pointer-events: none;
-}
+        button {
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
 
-.result {
-    font-size: 34px;
-    font-weight: bold;
-    animation: pulse 1s infinite alternate;
-}
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+        }
 
-@keyframes pulse {
-    from { transform: scale(1); }
-    to { transform: scale(1.1); }
-}
-
-.heart {
-    position: fixed;
-    bottom: -20px;
-    font-size: 22px;
-    animation: floatUp 6s linear infinite;
-}
-
-@keyframes floatUp {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-110vh); opacity: 0; }
-}
-</style>
+        #noBtn {
+            background-color: #808080;
+            color: white;
+        }
+    </style>
 </head>
-
 <body>
 
-<audio id="music" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
-</audio>
-
-<div class="container">
-    <h2>Will you be my Valentine? ❤️</h2>
-    <button id="yesBtn">YES</button>
-    <button id="noBtn">NO</button>
-</div>
-
-<script>
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const music = document.getElementById("music");
-
-function moveNo() {
-    noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
-    noBtn.style.top = Math.random() * (window.innerHeight - 60) + "px";
-}
-
-document.addEventListener("mousemove", moveNo);
-document.addEventListener("touchstart", moveNo);
-
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerText = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-}
-
-yesBtn.addEventListener("click", () => {
-    music.play();
-    document.body.innerHTML = `
-        <div class="container">
-            <div class="result">
-                I KNEW YOU LOVE ME ❤️<br>
-                Happy Valentine’s Day 💕
-            </div>
+    <div class="container">
+        <div id="gif-container">
+            <img id="main-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZneXF6bmZ6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v0hS6iPzG7o8e7bV6k/giphy.gif" alt="Cute Bear">
         </div>
-    `;
-    setInterval(createHeart, 300);
-});
-</script>
+        
+        <h1 id="question">Will you be my Valentine?</h1>
 
+        <div class="btn-group">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.querySelector('#yesBtn');
+        const noBtn = document.querySelector('#noBtn');
+        const question = document.querySelector('#question');
+        const mainGif = document.querySelector('#main-gif');
+
+        const messages = [
+            "No",
+            "Are you sure?",
+            "Really sure??",
+            "Akash will be sad... :(",
+            "Please don't do this!",
+            "You're breaking my heart!",
+            "I'm gonna cry... 😭",
+            "Okay fine, I'll stop asking...",
+            "Just kidding, SAY YES! ❤️"
+        ];
+
+        let messageIndex = 0;
+
+        noBtn.addEventListener('click', () => {
+            // Update No button text
+            noBtn.innerHTML = messages[messageIndex];
+            messageIndex = (messageIndex + 1) % messages.length;
+
+            // Make Yes button bigger
+            const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (currentSize * 1.4) + "px";
+            yesBtn.style.padding = (currentSize * 0.8) + "px " + (currentSize * 1.5) + "px";
+        });
+
+        yesBtn.addEventListener('click', () => {
+            question.innerHTML = "Yay! See you on Valentine's Day! ❤️";
+            mainGif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXA0bmZ6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/UMon0WU1QsUj6/giphy.gif";
+            
+            // Hide No button
+            noBtn.style.display = 'none';
+        });
+    </script>
 </body>
 </html>

@@ -1,11 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You ❤️</title>
+    <title>For Nikki Baby ❤️</title>
     <style>
-        /* CSS Styling */
         body {
             display: flex;
             justify-content: center;
@@ -15,30 +15,49 @@
             background-color: #fff0f3;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
+            position: relative;
+        }
+
+        /* Full Page Emoji Rain */
+        .emoji {
+            position: absolute;
+            top: -50px;
+            font-size: 24px;
+            user-select: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
         }
 
         .container {
             text-align: center;
-            padding: 20px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            z-index: 10;
+            max-width: 400px;
+            backdrop-filter: blur(5px);
         }
 
-        #gif-container {
-            height: 250px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
+        #gif-container img {
+            max-width: 200px;
+            border-radius: 20px;
+            margin-bottom: 10px;
         }
 
-        img {
-            max-width: 250px;
-            border-radius: 15px;
-        }
-
-        h1 {
-            color: #ff4d6d;
-            font-size: 2rem;
-            margin-bottom: 30px;
+        h1 { color: #d81b60; font-size: 1.8rem; margin: 10px 0; }
+        .days-counter {
+            background: #ff4d6d;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
 
         .btn-group {
@@ -46,42 +65,46 @@
             justify-content: center;
             align-items: center;
             gap: 15px;
-            flex-wrap: wrap;
+            margin-top: 20px;
         }
 
         button {
             padding: 12px 25px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.2s ease-in-out;
+            transition: 0.2s;
         }
 
-        #yesBtn {
-            background-color: #ff4d6d;
-            color: white;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
-        }
+        #yesBtn { background-color: #ff4d6d; color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
+        #noBtn { background-color: #adb5bd; color: white; }
 
-        #noBtn {
-            background-color: #808080;
-            color: white;
-        }
+        /* Digital Rose Animation */
+        #rose-garden { display: none; font-size: 5rem; animation: grow 1s ease-out; }
+        @keyframes grow { from { transform: scale(0); } to { transform: scale(1); } }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+
+    <div class="container" id="main-card">
+        <div class="days-counter">Together for 2407 Days ❤️</div>
         <div id="gif-container">
             <img id="main-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZneXF6bmZ6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v0hS6iPzG7o8e7bV6k/giphy.gif" alt="Cute Bear">
         </div>
         
-        <h1 id="question">Will you be my Valentine?</h1>
+        <h1 id="question">Will you be my Valentine, Nikki? 🌹</h1>
+        <p id="sub-text">Sirf tumhara, Baby. ❤️</p>
 
-        <div class="btn-group">
-            <button id="yesBtn">Yes</button>
+        <div id="rose-garden">🌹✨</div>
+
+        <div class="btn-group" id="buttons">
+            <button id="yesBtn">Yes! 💖</button>
             <button id="noBtn">No</button>
         </div>
     </div>
@@ -90,39 +113,51 @@
         const yesBtn = document.querySelector('#yesBtn');
         const noBtn = document.querySelector('#noBtn');
         const question = document.querySelector('#question');
+        const subText = document.querySelector('#sub-text');
         const mainGif = document.querySelector('#main-gif');
+        const roseGarden = document.querySelector('#rose-garden');
+        const music = document.querySelector('#bgMusic');
 
-        const messages = [
-            "No",
-            "Are you sure?",
-            "Really sure??",
-            "Akash will be sad... :(",
-            "Please don't do this!",
-            "You're breaking my heart!",
-            "I'm gonna cry... 😭",
-            "Okay fine, I'll stop asking...",
-            "Just kidding, SAY YES! ❤️"
+        const phrases = [
+            "No", "Are you sure, Nikki? 🥺", "Really sure, Baby?", 
+            "Nikki, maan jao na!", "Don't do this, Baby...", 
+            "Akash ka dil mat todo! 💔", "Ab toh Yes bol do! 🥰"
         ];
+        let phraseIndex = 0;
 
-        let messageIndex = 0;
+        function createEmoji() {
+            const emojis = ['❤️', '💖', '🌹', '✨'];
+            const emoji = document.createElement('div');
+            emoji.classList.add('emoji');
+            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + "vw";
+            emoji.style.animationDuration = Math.random() * 2 + 3 + "s";
+            document.body.appendChild(emoji);
+            setTimeout(() => emoji.remove(), 5000);
+        }
+        setInterval(createEmoji, 300);
 
         noBtn.addEventListener('click', () => {
-            // Update No button text
-            noBtn.innerHTML = messages[messageIndex];
-            messageIndex = (messageIndex + 1) % messages.length;
-
-            // Make Yes button bigger
+            noBtn.innerText = phrases[phraseIndex];
+            phraseIndex = (phraseIndex + 1) % phrases.length;
             const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
             yesBtn.style.fontSize = (currentSize * 1.4) + "px";
-            yesBtn.style.padding = (currentSize * 0.8) + "px " + (currentSize * 1.5) + "px";
+            yesBtn.style.padding = (currentSize * 0.7) + "px " + (currentSize * 1.3) + "px";
         });
 
         yesBtn.addEventListener('click', () => {
-            question.innerHTML = "Yay! See you on Valentine's Day! ❤️";
-            mainGif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXA0bmZ6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/UMon0WU1QsUj6/giphy.gif";
+            // Play Music
+            music.play().catch(e => console.log("Music play blocked by browser"));
             
-            // Hide No button
-            noBtn.style.display = 'none';
+            question.innerText = "I Love You, Nikki Baby! ❤️";
+            subText.innerText = "Mera har lamha tumhare naam...";
+            
+            // Show Rose and Change GIF
+            roseGarden.style.display = "block";
+            mainGif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmZ6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/9fuvO2fUuN84G2pGzW/giphy.gif";
+            
+            document.querySelector('#buttons').style.display = 'none';
+            setInterval(createEmoji, 100);
         });
     </script>
 </body>

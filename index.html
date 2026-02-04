@@ -16,181 +16,151 @@
             overflow: hidden;
         }
 
-        /* Floating Hearts Background */
-        .floating-heart {
-            position: absolute;
-            font-size: 20px;
-            color: #ff8fa3;
-            user-select: none;
-            z-index: 1;
-            animation: float Up 4s linear infinite;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(110vh) scale(0.5); opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-        }
-
         .card {
             background: white;
-            padding: 40px 30px;
-            border-radius: 40px;
+            padding: 30px;
+            border-radius: 30px;
             box-shadow: 0 15px 40px rgba(255, 143, 163, 0.3);
             text-align: center;
             z-index: 10;
-            max-width: 350px;
             width: 90%;
-            border: 2px solid #fff;
+            max-width: 350px;
         }
 
         .days-tag {
             background-color: #ff4d6d;
             color: white;
-            padding: 8px 20px;
+            padding: 8px 15px;
             border-radius: 20px;
             font-size: 14px;
             font-weight: bold;
+            margin-bottom: 20px;
             display: inline-block;
-            margin-bottom: 20px;
         }
 
-        /* Pure CSS Cute Bear Placeholder */
-        .bear-container {
-            font-size: 80px;
-            margin-bottom: 20px;
-            display: block;
+        .pic-container img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #ff4d6d;
+            object-fit: cover;
+            margin-bottom: 15px;
         }
 
-        h1 {
-            color: #b91d47;
-            font-size: 24px;
-            margin: 10px 0;
-            line-height: 1.4;
-        }
-
-        .sub-text {
-            color: #555;
-            font-size: 16px;
-            margin-bottom: 30px;
-        }
-
+        h1 { color: #b91d47; font-size: 22px; margin-bottom: 10px; }
+        
         .btn-group {
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Mobile friendly */
             align-items: center;
             gap: 15px;
-            position: relative;
-        }
-
-        button {
-            padding: 12px 28px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            margin-top: 20px;
         }
 
         #yesBtn {
-            background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
+            background: #ff4d6d;
             color: white;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.2s;
         }
 
         #noBtn {
-            background-color: #ced4da;
+            background: #ced4da;
             color: #495057;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
         }
 
-        /* Digital Rose Reveal */
-        #digital-rose {
-            display: none;
-            font-size: 60px;
-            margin-top: 20px;
-            animation: grow 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        #rose-display { display: none; font-size: 50px; margin-top: 15px; }
+
+        .emoji-float {
+            position: absolute;
+            bottom: -50px;
+            animation: floatUp 4s linear infinite;
         }
 
-        @keyframes grow {
-            from { transform: scale(0); }
-            to { transform: scale(1); }
+        @keyframes floatUp {
+            to { transform: translateY(-110vh); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <audio id="loveSong" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    <audio id="music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
     <div class="card">
         <div class="days-tag">Together for 2407 Days ❤️</div>
         
-        <div class="bear-container" id="emoji-display">
-            🧸💖🧸
+        <div class="pic-container">
+            <img src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png" alt="Love">
         </div>
 
-        <h1 id="main-heading">Will you be my Valentine, <br>Nikki? 🌹</h1>
-        <p class="sub-text" id="sub-heading">Sirf tumhara, Baby. ❤️</p>
+        <h1 id="question">Will you be my Valentine, Nikki? 🌹</h1>
+        <p id="status">Sirf tumhara, Baby. ❤️</p>
+        
+        <div id="rose-display">🌹✨👩‍❤️‍👨</div>
 
-        <div id="digital-rose">🌹✨</div>
-
-        <div class="btn-group" id="actions">
-            <button id="yesBtn" onclick="celebrate()">Yes! ✨</button>
-            <button id="noBtn" onmouseover="moveNo()">No</button>
+        <div class="btn-group">
+            <button id="yesBtn">Yes! 💖</button>
+            <button id="noBtn">No</button>
         </div>
     </div>
 
     <script>
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
-        const mainHeading = document.getElementById('main-heading');
-        const subHeading = document.getElementById('sub-heading');
-        const emojiDisplay = document.getElementById('emoji-display');
-        const rose = document.getElementById('digital-rose');
-        const song = document.getElementById('loveSong');
+        const question = document.getElementById('question');
+        const statusText = document.getElementById('status');
+        const rose = document.getElementById('rose-display');
+        const music = document.getElementById('music');
 
-        const messages = [
+        const msgs = [
             "No", "Are you sure, Nikki? 🥺", "Really sure, Baby?", 
-            "Plss maan jao na!", "Don't do this... 💔", "I'll be so sad!", "SAY YES! 🥰"
+            "Akash ka dil mat todo! 💔", "Ek baar aur socho...", "Maan jao na! 🥰"
         ];
-        let msgIndex = 0;
+        let i = 0;
 
-        // Background Hearts
+        // "No" Button Logic - Ab yeh pakka chalega!
+        noBtn.onclick = function() {
+            noBtn.innerHTML = msgs[i];
+            i = (i + 1) % msgs.length;
+            
+            // "Yes" button ko bada karna
+            let currentSize = parseInt(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (currentSize + 8) + "px";
+            yesBtn.style.padding = (currentSize * 0.8) + "px " + (currentSize * 1.5) + "px";
+        };
+
+        // "Yes" Button Logic
+        yesBtn.onclick = function() {
+            question.innerHTML = "I Love You, Nikki Baby! ❤️";
+            statusText.innerHTML = "Hamesha ke liye sirf tumhara, Akash.";
+            rose.style.display = "block";
+            document.querySelector('.btn-group').style.display = "none";
+            music.play();
+            setInterval(createHeart, 100);
+        };
+
         function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('floating-heart');
-            heart.innerHTML = ['❤️', '💖', '✨', '🌹'][Math.floor(Math.random() * 4)];
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 4000);
+            const h = document.createElement('div');
+            h.classList.add('emoji-float');
+            h.innerHTML = ['❤️', '🌹', '✨'][Math.floor(Math.random()*3)];
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.fontSize = (Math.random() * 20 + 10) + "px";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 4000);
         }
         setInterval(createHeart, 400);
-
-        // Move No Button or Change Text
-        function moveNo() {
-            noBtn.innerText = messages[msgIndex];
-            msgIndex = (msgIndex + 1) % messages.length;
-            
-            // Make Yes Button Grow
-            const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-            yesBtn.style.fontSize = (currentSize + 5) + "px";
-            yesBtn.style.padding = (currentSize * 0.8) + "px " + (currentSize * 1.5) + "px";
-        }
-
-        // Final Celebration
-        function celebrate() {
-            song.play(); // Starts the music
-            mainHeading.innerHTML = "I Love You, Nikki Baby! ❤️✨";
-            subHeading.innerHTML = "Hamesha ke liye sirf tumhara, Akash.";
-            emojiDisplay.innerHTML = "👩‍❤️‍👨";
-            rose.style.display = "block";
-            document.getElementById('actions').style.display = "none";
-            
-            // Celebration Rain
-            setInterval(createHeart, 100);
-        }
     </script>
 </body>
 </html>

@@ -47,12 +47,9 @@
             border-radius: 20px;
             border: 5px solid #ff4d6d;
             margin-bottom: 15px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        h1 { color: #b91d47; font-size: 22px; margin-bottom: 10px; line-height: 1.4; }
+        h1 { color: #b91d47; font-size: 22px; margin-bottom: 10px; }
         #status { color: #ff4d6d; font-size: 18px; font-weight: bold; }
         
         .btn-group {
@@ -64,39 +61,34 @@
         }
 
         #yesBtn {
-            background: #ff4d6d;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 18px;
-            transition: 0.2s;
-            z-index: 100;
+            background: #ff4d6d; color: white;
+            padding: 12px 30px; border: none; border-radius: 50px;
+            font-weight: bold; cursor: pointer; font-size: 18px;
+            transition: 0.2s; z-index: 100;
         }
 
         #noBtn {
-            background: #adb5bd;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 14px;
+            background: #adb5bd; color: white;
+            padding: 10px 20px; border: none; border-radius: 50px;
+            cursor: pointer; font-size: 14px;
         }
 
         #final-celebration { display: none; }
 
-        .emoji-float {
+        /* Rose Petal Animation */
+        .petal {
             position: absolute;
-            bottom: -50px;
+            background-color: #ff4d6d;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.8;
             z-index: 1;
-            animation: floatUp 4s linear forwards;
+            pointer-events: none;
+            animation: fall linear forwards;
         }
 
-        @keyframes floatUp {
-            to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(360deg); }
         }
     </style>
 </head>
@@ -113,7 +105,7 @@
             <div class="pic-container">
                 <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZneXF6bmZ6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6NXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v0hS6iPzG7o8e7bV6k/giphy.gif" alt="Waiting...">
             </div>
-            <h1 id="question">Will you be my Valentine, Nikki? 🌹</h1>
+            <h1>Will you be my Valentine, Nikki? 🌹</h1>
             <p>Sirf tumhara, Baby. ❤️</p>
             <div class="btn-group">
                 <button id="yesBtn">Yes! 💖</button>
@@ -139,24 +131,16 @@
         const music = document.getElementById('music');
 
         const msgs = [
-            "No",
-            "Ek baar aur soch lo na 💗",
-            "Itna bhi mushkil nahi hai YES bolna 🥹",
-            "Dil se poocho, jawab YES hi aayega 💕",
-            "Main yahin wait kar raha hoon ⏳",
-            "Ye NO thoda fake lag raha hai 👀",
-            "Last chance… pakka wala 😭",
-            "Ab NO bolna allowed nahi hai 🚫",
-            "Dil ka decision lo, ego ka nahi 💓",
-            "YES likha hai kismat me ✨"
+            "No", "Ek baar aur soch lo na 💗", "Itna bhi mushkil nahi hai YES bolna 🥹",
+            "Dil se poocho, jawab YES hi aayega 💕", "Main yahin wait kar raha hoon ⏳",
+            "Ye NO thoda fake lag raha hai 👀", "Last chance… pakka wala 😭",
+            "Ab NO bolna allowed nahi hai 🚫", "Dil ka decision lo, ego ka nahi 💓", "YES likha hai kismat me ✨"
         ];
         let i = 0;
 
         noBtn.onclick = function() {
             noBtn.innerHTML = msgs[i];
             i = (i + 1) % msgs.length;
-            
-            // Yes button grows
             let currentSize = parseInt(window.getComputedStyle(yesBtn).fontSize);
             yesBtn.style.fontSize = (currentSize + 10) + "px";
             yesBtn.style.padding = (currentSize * 0.6) + "px " + (currentSize * 1.2) + "px";
@@ -166,20 +150,28 @@
             askingPhase.style.display = "none";
             finalCelebration.style.display = "block";
             music.play();
-            setInterval(createHeart, 100);
+            // Start Falling Petals
+            setInterval(createPetal, 150);
         };
 
-        function createHeart() {
-            const h = document.createElement('div');
-            h.classList.add('emoji-float');
-            const emojis = ['❤️', '🌹', '✨', '💖'];
-            h.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
-            h.style.left = Math.random() * 100 + "vw";
-            h.style.fontSize = (Math.random() * 20 + 15) + "px";
-            document.body.appendChild(h);
-            setTimeout(() => h.remove(), 4000);
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            
+            // Random sizes and positions
+            const size = Math.random() * 15 + 10 + 'px';
+            petal.style.width = size;
+            petal.style.height = size;
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 2 + 's';
+            
+            // Random petal colors (shades of red/pink)
+            const colors = ['#ff4d6d', '#ff758f', '#c9184a', '#ffb3c1'];
+            petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            document.body.appendChild(petal);
+            setTimeout(() => petal.remove(), 5000);
         }
-        setInterval(createHeart, 400);
     </script>
 </body>
 </html>

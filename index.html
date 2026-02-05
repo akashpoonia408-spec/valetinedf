@@ -6,76 +6,105 @@
 <title>For My Baby ❤️</title>
 
 <style>
-body {
-    display:flex; justify-content:center; align-items:center;
-    min-height:100vh; margin:0; background:#ffeef2;
-    font-family:'Segoe UI', Arial, sans-serif; overflow:hidden;
+body{
+ display:flex;justify-content:center;align-items:center;
+ min-height:100vh;margin:0;background:#ffeef2;
+ font-family:'Segoe UI',Arial,sans-serif;
+ overflow:hidden;position:relative;
 }
 
-.card {
-    background:rgba(255,255,255,0.95);
-    padding:25px; border-radius:30px;
-    box-shadow:0 15px 40px rgba(255,143,163,0.4);
-    text-align:center; width:85%; max-width:380px;
+.card{
+ background:rgba(255,255,255,.95);
+ padding:25px;border-radius:30px;
+ box-shadow:0 15px 40px rgba(255,143,163,.4);
+ text-align:center;width:85%;max-width:380px;
+ z-index:10;
 }
 
-.days-tag {
-    background:#ff4d6d; color:white;
-    padding:8px 15px; border-radius:20px;
-    font-weight:bold; margin-bottom:15px;
-    display:inline-block; font-size:14px;
+.days-tag{
+ background:#ff4d6d;color:#fff;
+ padding:8px 15px;border-radius:20px;
+ font-weight:bold;margin-bottom:15px;
+ display:inline-block;font-size:14px;
 }
 
-.pic-container img {
-    width:100%; max-width:220px;
-    border-radius:20px; border:4px solid #ff4d6d;
-    margin-bottom:10px;
+.pic-container img{
+ width:100%;max-width:220px;
+ border-radius:20px;border:4px solid #ff4d6d;
+ margin-bottom:10px;
 }
 
-/* GIF animation */
-.loveGif {
-    max-width:180px;
-    margin-top:15px;
-    border-radius:18px;
-    border:3px solid #ff4d6d;
-    animation:popIn 1.5s ease forwards;
+/* GIF */
+.loveGif{
+ max-width:180px;margin-top:15px;
+ border-radius:18px;border:3px solid #ff4d6d;
+ animation:popIn 1.5s ease forwards;
 }
-@keyframes popIn {
-    0%{opacity:0;transform:scale(0.6);}
-    60%{opacity:1;transform:scale(1.1);}
-    100%{transform:scale(1);}
+@keyframes popIn{
+ 0%{opacity:0;transform:scale(.6)}
+ 60%{opacity:1;transform:scale(1.1)}
+ 100%{transform:scale(1)}
 }
 
-#yesBtn {
-    background:#ff4d6d; color:white;
-    padding:12px 30px; border:none;
-    border-radius:50px; font-weight:bold;
-    cursor:pointer; font-size:18px;
+#yesBtn{
+ background:#ff4d6d;color:#fff;
+ padding:12px 30px;border:none;
+ border-radius:50px;font-size:18px;
+ font-weight:bold;cursor:pointer;
 }
-#noBtn {
-    background:#adb5bd; color:white;
-    padding:10px 20px; border:none;
-    border-radius:50px; cursor:pointer;
-    margin-top:10px;
-}
-
-.box-container {
-    display:flex; justify-content:space-around;
-    margin-top:20px; display:none; gap:10px;
-}
-.gift-box {
-    flex:1; background:#ff8fa3; color:white;
-    padding:10px 5px; border-radius:12px;
-    cursor:pointer; font-size:11px; font-weight:bold;
+#noBtn{
+ background:#adb5bd;color:#fff;
+ padding:10px 20px;border:none;
+ border-radius:50px;cursor:pointer;
+ margin-top:10px;
 }
 
-#typewriter {
-    color:#b91d47; font-size:16px;
-    font-style:italic; min-height:40px;
-    margin:15px 0; line-height:1.4;
+.box-container{
+ display:none;justify-content:space-around;
+ margin-top:20px;gap:10px;
+}
+.gift-box{
+ flex:1;background:#ff8fa3;color:#fff;
+ padding:10px 5px;border-radius:12px;
+ font-size:11px;font-weight:bold;
+ cursor:pointer;
 }
 
-#final-celebration { display:none; }
+#typewriter{
+ color:#b91d47;font-size:16px;
+ font-style:italic;min-height:40px;
+ margin:15px 0;
+}
+
+/* petals */
+.petal{
+ position:absolute;background:#ff4d6d;
+ border-radius:150% 0 150% 0;
+ opacity:.7;pointer-events:none;
+ animation:fall linear forwards;
+}
+@keyframes fall{
+ from{transform:translateY(-10vh) rotate(0)}
+ to{transform:translateY(110vh) rotate(360deg)}
+}
+
+/* floating images p1–p4 */
+.float-img{
+ position:absolute;bottom:-120px;
+ width:70px;height:90px;
+ object-fit:cover;border-radius:10px;
+ border:2px solid #fff;
+ box-shadow:0 5px 15px rgba(0,0,0,.2);
+ animation:floatUp 6s linear forwards;
+ z-index:5;
+}
+@keyframes floatUp{
+ 0%{transform:translateY(0);opacity:0}
+ 20%{opacity:1}
+ 100%{transform:translateY(-110vh) rotate(20deg);opacity:0}
+}
+
+#final-celebration{display:none}
 </style>
 </head>
 
@@ -85,70 +114,93 @@ body {
 <div class="days-tag">Together for 2407 Days...Forever ❤️</div>
 
 <div id="asking-phase">
-    <div class="pic-container">
-        <img src="https://media.tenor.com/97y_7S6y_S8AAAAi/bears-with-hearts-love.gif">
-    </div>
-    <h1>Will you be my Valentine, baby? 🌹</h1>
-    <button id="yesBtn">Yes! 💖</button>
-    <button id="noBtn">No</button>
+ <div class="pic-container">
+  <img src="https://media.tenor.com/97y_7S6y_S8AAAAi/bears-with-hearts-love.gif">
+ </div>
+ <h1>Will you be my Valentine, baby? 🌹</h1>
+ <button id="yesBtn">Yes! 💖</button><br>
+ <button id="noBtn">No</button>
 </div>
 
 <div id="final-celebration">
-    <div class="pic-container">
-        <img src="1000410336.jpg">
-    </div>
+ <div class="pic-container">
+  <img src="1000410336.jpg">
+ </div>
 
-    <!-- YOUR UPLOADED GIF -->
-    <div class="pic-container">
-        <img src="love-cat.gif" class="loveGif">
-    </div>
+ <div class="pic-container">
+  <img src="love-cat.gif" class="loveGif">
+ </div>
 
-    <div id="typewriter"></div>
+ <div id="typewriter"></div>
 
-    <div class="box-container" id="boxRow">
-        <div class="gift-box" onclick="this.innerHTML='Tum meri'">Magic 1 🎁</div>
-        <div class="gift-box" onclick="this.innerHTML='Jaan nahi'">Magic 2 🎁</div>
-        <div class="gift-box" onclick="this.innerHTML='Zindagi ho'">Magic 3 🎁</div>
-    </div>
+ <div class="box-container" id="boxRow">
+  <div class="gift-box" onclick="this.innerHTML='Tum meri'">Magic 1 🎁</div>
+  <div class="gift-box" onclick="this.innerHTML='Jaan nahi'">Magic 2 🎁</div>
+  <div class="gift-box" onclick="this.innerHTML='Zindagi ho'">Magic 3 🎁</div>
+ </div>
 
-    <h2 style="color:#ff4d6d;">I Love You Baby ❤️</h2>
+ <h2 style="color:#ff4d6d;">I Love You Baby ❤️</h2>
 </div>
 </div>
 
 <script>
-const yesBtn=document.getElementById('yesBtn');
-const noBtn=document.getElementById('noBtn');
-const asking=document.getElementById('asking-phase');
-const finalPage=document.getElementById('final-celebration');
-const boxRow=document.getElementById('boxRow');
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+const ask=document.getElementById("asking-phase");
+const final=document.getElementById("final-celebration");
+const boxRow=document.getElementById("boxRow");
 
-const msgs=["No","Soch lo 🥺","Itna mushkil nahi","Dil se poocho 💕","Last chance 😭"];
+const msgs=["No","Soch lo 💗","Dil se bolo 🥹","Last chance 😭"];
 let i=0;
 
-noBtn.onclick=function(){
-    noBtn.innerHTML=msgs[i];
-    i=(i+1)%msgs.length;
-    let size=parseInt(window.getComputedStyle(yesBtn).fontSize);
-    yesBtn.style.fontSize=(size+8)+"px";
+noBtn.onclick=()=>{
+ noBtn.innerHTML=msgs[i];
+ i=(i+1)%msgs.length;
+ let s=parseInt(getComputedStyle(yesBtn).fontSize);
+ yesBtn.style.fontSize=(s+8)+"px";
 };
 
-yesBtn.onclick=function(){
-    asking.style.display="none";
-    finalPage.style.display="block";
-    boxRow.style.display="flex";
-    startTypewriter();
+yesBtn.onclick=()=>{
+ ask.style.display="none";
+ final.style.display="block";
+ boxRow.style.display="flex";
+ startTypewriter();
+ setInterval(createPetal,200);
+ startFloatingGallery();
 };
 
 function startTypewriter(){
-const text="Nikki, tum meri zindagi ka sabse khoobsurat ehsas ho ❤️";
-let i=0;
-function type(){
- if(i<text.length){
-  document.getElementById("typewriter").innerHTML+=text.charAt(i);
-  i++; setTimeout(type,70);
- }
+ const text="Nikki, tum meri zindagi ka sabse khoobsurat ehsas ho ❤️";
+ let i=0, el=document.getElementById("typewriter");
+ (function type(){
+  if(i<text.length){
+   el.innerHTML+=text.charAt(i++);
+   setTimeout(type,70);
+  }
+ })();
 }
-type();
+
+function createPetal(){
+ const p=document.createElement("div");
+ p.className="petal";
+ const s=Math.random()*15+10+"px";
+ p.style.width=p.style.height=s;
+ p.style.left=Math.random()*100+"vw";
+ p.style.animationDuration=Math.random()*3+2+"s";
+ document.body.appendChild(p);
+ setTimeout(()=>p.remove(),5000);
+}
+
+function startFloatingGallery(){
+ const photos=["p1.jpeg","p2.jpeg","p3.jpeg","p4.jpg"];
+ setInterval(()=>{
+  const img=document.createElement("img");
+  img.src=photos[Math.floor(Math.random()*photos.length)];
+  img.className="float-img";
+  img.style.left=Math.random()*90+"vw";
+  document.body.appendChild(img);
+  setTimeout(()=>img.remove(),6000);
+ },1500);
 }
 </script>
 

@@ -1,164 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Baby ❤️</title>
-    <style>
-        body {
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; margin: 0; background-color: #ffeef2;
-            font-family: 'Segoe UI', Arial, sans-serif; overflow: hidden;
-            position: relative;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Baby ❤️</title>
 
-        .card {
-            background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 30px;
-            box-shadow: 0 15px 40px rgba(255, 143, 163, 0.4); text-align: center;
-            z-index: 10; width: 85%; max-width: 380px; border: 2px solid white;
-        }
+<style>
+body {
+    display:flex; justify-content:center; align-items:center;
+    min-height:100vh; margin:0; background:#ffeef2;
+    font-family:'Segoe UI', Arial, sans-serif; overflow:hidden;
+}
 
-        .days-tag { background-color: #ff4d6d; color: white; padding: 8px 15px; border-radius: 20px; font-weight: bold; margin-bottom: 15px; display: inline-block; font-size: 14px; }
+.card {
+    background:rgba(255,255,255,0.95);
+    padding:25px; border-radius:30px;
+    box-shadow:0 15px 40px rgba(255,143,163,0.4);
+    text-align:center; width:85%; max-width:380px;
+}
 
-        .pic-container img { width: 100%; max-width: 220px; border-radius: 20px; border: 4px solid #ff4d6d; margin-bottom: 10px; }
+.days-tag {
+    background:#ff4d6d; color:white;
+    padding:8px 15px; border-radius:20px;
+    font-weight:bold; margin-bottom:15px;
+    display:inline-block; font-size:14px;
+}
 
-        #yesBtn { background: #ff4d6d; color: white; padding: 12px 30px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 18px; z-index: 100; transition: 0.3s; }
-        #noBtn { background: #adb5bd; color: white; padding: 10px 20px; border: none; border-radius: 50px; cursor: pointer; margin-top: 10px; }
+.pic-container img {
+    width:100%; max-width:220px;
+    border-radius:20px; border:4px solid #ff4d6d;
+    margin-bottom:10px;
+}
 
-        /* Magic Boxes Style */
-        .box-container { display: flex; justify-content: space-around; margin-top: 20px; display: none; gap: 10px; }
-        .gift-box {
-            flex: 1; background: #ff8fa3; color: white; padding: 10px 5px;
-            border-radius: 12px; cursor: pointer; font-size: 11px; font-weight: bold;
-            transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+/* GIF animation */
+.loveGif {
+    max-width:180px;
+    margin-top:15px;
+    border-radius:18px;
+    border:3px solid #ff4d6d;
+    animation:popIn 1.5s ease forwards;
+}
+@keyframes popIn {
+    0%{opacity:0;transform:scale(0.6);}
+    60%{opacity:1;transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
 
-        /* Floating Gallery Elements */
-        .float-img {
-            position: absolute; bottom: -120px; width: 70px; height: 90px;
-            object-fit: cover; border-radius: 10px; border: 2px solid white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 5;
-            animation: floatUp 6s linear forwards;
-        }
+#yesBtn {
+    background:#ff4d6d; color:white;
+    padding:12px 30px; border:none;
+    border-radius:50px; font-weight:bold;
+    cursor:pointer; font-size:18px;
+}
+#noBtn {
+    background:#adb5bd; color:white;
+    padding:10px 20px; border:none;
+    border-radius:50px; cursor:pointer;
+    margin-top:10px;
+}
 
-        @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            20% { opacity: 1; }
-            100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
-        }
+.box-container {
+    display:flex; justify-content:space-around;
+    margin-top:20px; display:none; gap:10px;
+}
+.gift-box {
+    flex:1; background:#ff8fa3; color:white;
+    padding:10px 5px; border-radius:12px;
+    cursor:pointer; font-size:11px; font-weight:bold;
+}
 
-        /* Typewriter Nazm */
-        #typewriter { color: #b91d47; font-size: 16px; font-style: italic; min-height: 40px; margin: 15px 0; line-height: 1.4; }
+#typewriter {
+    color:#b91d47; font-size:16px;
+    font-style:italic; min-height:40px;
+    margin:15px 0; line-height:1.4;
+}
 
-        /* Petal Style */
-        .petal { position: absolute; background-color: #ff4d6d; border-radius: 150% 0 150% 0; opacity: 0.7; z-index: 1; pointer-events: none; animation: fall linear forwards; }
-        @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
-
-        #final-celebration { display: none; }
-    </style>
+#final-celebration { display:none; }
+</style>
 </head>
+
 <body>
 
-    <div class="card">
-        <div class="days-tag">Together for 2407 Days...Forever ❤️</div>
-        
-        <div id="asking-phase">
-            <div class="pic-container">
-                <img src="https://media.tenor.com/97y_7S6y_S8AAAAi/bears-with-hearts-love.gif" alt="Cute Bears">
-            </div>
-            <h1>Will you be my Valentine, baby? 🌹</h1>
-            <div style="display:flex; flex-direction:column; align-items:center;">
-                <button id="yesBtn">Yes! 💖</button>
-                <button id="noBtn">No</button>
-            </div>
-        </div>
+<div class="card">
+<div class="days-tag">Together for 2407 Days...Forever ❤️</div>
 
-        <div id="final-celebration">
-            <div class="pic-container">
-                <img src="1000410336.jpg" alt="Our Memory" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2589/2589175.png'">
-            </div>
-            
-            <div id="typewriter"></div>
-            
-            <div class="box-container" id="boxRow">
-                <div class="gift-box" onclick="this.innerHTML='Tum meri'">Magic 1 🎁</div>
-                <div class="gift-box" onclick="this.innerHTML='Jaan nahi'">Magic 2 🎁</div>
-                <div class="gift-box" onclick="this.innerHTML='Zindagi ho'">Magic 3 🎁</div>
-            </div>
-            
-            <h2 style="color:#ff4d6d; margin-top:20px;">I Love You,Baby! ❤️</h2>
-        </div>
+<div id="asking-phase">
+    <div class="pic-container">
+        <img src="https://media.tenor.com/97y_7S6y_S8AAAAi/bears-with-hearts-love.gif">
+    </div>
+    <h1>Will you be my Valentine, baby? 🌹</h1>
+    <button id="yesBtn">Yes! 💖</button>
+    <button id="noBtn">No</button>
+</div>
+
+<div id="final-celebration">
+    <div class="pic-container">
+        <img src="1000410336.jpg">
     </div>
 
-    <script>
-        const yesBtn = document.getElementById('yesBtn');
-        const noBtn = document.getElementById('noBtn');
-        const askingPhase = document.getElementById('asking-phase');
-        const finalCelebration = document.getElementById('final-celebration');
-        const boxRow = document.getElementById('boxRow');
+    <!-- YOUR UPLOADED GIF -->
+    <div class="pic-container">
+        <img src="love-cat.gif" class="loveGif">
+    </div>
 
-        const msgs = [
-            "No", "Ek baar aur soch lo na 💗", "Itna bhi mushkil nahi hai YES bolna 🥹",
-            "Dil se poocho, jawab YES hi aayega 💕", "Main yahin wait kar raha hoon ⏳",
-            "Ye NO thoda fake lag raha hai 👀", "Last chance… pakka wala 😭",
-            "Ab NO bolna allowed nahi hai 🚫", "Dil ka decision lo, ego ka nahi 💓", "YES likha hai kismat me ✨"
-        ];
-        let i = 0;
+    <div id="typewriter"></div>
 
-        noBtn.onclick = function() {
-            noBtn.innerHTML = msgs[i];
-            i = (i + 1) % msgs.length;
-            let currentSize = parseInt(window.getComputedStyle(yesBtn).fontSize);
-            yesBtn.style.fontSize = (currentSize + 8) + "px";
-            yesBtn.style.padding = (currentSize * 0.5) + "px " + (currentSize * 1.1) + "px";
-        };
+    <div class="box-container" id="boxRow">
+        <div class="gift-box" onclick="this.innerHTML='Tum meri'">Magic 1 🎁</div>
+        <div class="gift-box" onclick="this.innerHTML='Jaan nahi'">Magic 2 🎁</div>
+        <div class="gift-box" onclick="this.innerHTML='Zindagi ho'">Magic 3 🎁</div>
+    </div>
 
-        yesBtn.onclick = function() {
-            askingPhase.style.display = "none";
-            finalCelebration.style.display = "block";
-            boxRow.style.display = "flex";
-            startTypewriter();
-            setInterval(createPetal, 200);
-            startFloatingGallery();
-        };
+    <h2 style="color:#ff4d6d;">I Love You Baby ❤️</h2>
+</div>
+</div>
 
-        function startTypewriter() {
-            const text = "Nikki, tum meri zindagi ka sabse khoobsurat ehsas ho... Aaj se nahi, hamesha se! ❤️";
-            let index = 0;
-            const container = document.getElementById("typewriter");
-            function type() {
-                if (index < text.length) {
-                    container.innerHTML += text.charAt(index);
-                    index++;
-                    setTimeout(type, 70);
-                }
-            }
-            type();
-        }
+<script>
+const yesBtn=document.getElementById('yesBtn');
+const noBtn=document.getElementById('noBtn');
+const asking=document.getElementById('asking-phase');
+const finalPage=document.getElementById('final-celebration');
+const boxRow=document.getElementById('boxRow');
 
-        function createPetal() {
-            const petal = document.createElement('div');
-            petal.classList.add('petal');
-            const size = Math.random() * 15 + 10 + 'px';
-            petal.style.width = size; petal.style.height = size;
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.animationDuration = Math.random() * 3 + 2 + 's';
-            petal.style.backgroundColor = ['#ff4d6d', '#ff758f', '#ffb3c1'][Math.floor(Math.random()*3)];
-            document.body.appendChild(petal);
-            setTimeout(() => petal.remove(), 5000);
-        }
+const msgs=["No","Soch lo 🥺","Itna mushkil nahi","Dil se poocho 💕","Last chance 😭"];
+let i=0;
 
-        function startFloatingGallery() {
-            const photoNames = ['p1.jpeg', 'p2.jpeg', 'p3.jpeg', 'p4.jpg']; 
-            setInterval(() => {
-                const img = document.createElement('img');
-                img.src = photoNames[Math.floor(Math.random() * photoNames.length)];
-                img.classList.add('float-img');
-                img.style.left = Math.random() * 90 + 'vw';
-                document.body.appendChild(img);
-                setTimeout(() => img.remove(), 6000);
-            }, 1500);
-        }
-    </script>
+noBtn.onclick=function(){
+    noBtn.innerHTML=msgs[i];
+    i=(i+1)%msgs.length;
+    let size=parseInt(window.getComputedStyle(yesBtn).fontSize);
+    yesBtn.style.fontSize=(size+8)+"px";
+};
+
+yesBtn.onclick=function(){
+    asking.style.display="none";
+    finalPage.style.display="block";
+    boxRow.style.display="flex";
+    startTypewriter();
+};
+
+function startTypewriter(){
+const text="Nikki, tum meri zindagi ka sabse khoobsurat ehsas ho ❤️";
+let i=0;
+function type(){
+ if(i<text.length){
+  document.getElementById("typewriter").innerHTML+=text.charAt(i);
+  i++; setTimeout(type,70);
+ }
+}
+type();
+}
+</script>
+
 </body>
 </html>
